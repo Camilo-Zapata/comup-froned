@@ -1,8 +1,18 @@
 // Establecer el color de fondo para todo el cuerpo de la aplicación
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 body{
     background-image: url('../../public/img/fondo.png'); /* Ruta de la imagen */
     background-size: cover; /* Ajustar el tamaño de la imagen para cubrir el cuerpo */
     background-position: center; /* Centrar la imagen */
     background-repeat: no-repeat; /* Evitar que la imagen se repita */
-    height: 140vh;
+    height: 158vh;
 }
+
+
+  
+ 
