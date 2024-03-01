@@ -60,32 +60,38 @@
 
   </div>
 
-  <q-form class="relative top-4"  @submit="proceso" >
+  <q-form class="relative top-4"  @submit="envio"  >
     <q-list bordered>
       <div class="q-pa-md">
         
         <div class="q-gutter-md" >
 
-         <q-input rounded outlined label-color="white"  color="blue"  v-model="name" label="Nombre" />
+         <q-input rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="name" label="Nombre*" lazy-rules
+                        :rules="[val => val && val.length > 4 || 'Tu Nombre es requerido']" /> 
 
-         <!-- <q-input rounded outlined label-color="white"  color="blue"  v-model="last_name" label="Apellido" />
-         <q-input rounded outlined label-color="white" type="email"  color="blue"  v-model="email" label="Email" />
-         <q-input rounded outlined label-color="white"   color="blue"  v-model="phone" label="Telefono" />
+         <q-input rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="last_name" label="Apellido*" lazy-rules
+                        :rules="[val => val && val.length > 4 || 'Tu Apellido es requerido']" /> 
+
+         <q-input rounded outlined label-color="blue"  color="blue"  bg-color="white" type="email"  v-model="email" label="Email*" lazy-rules
+                    :rules="[(val) => isEmailValid(val) || 'Este correo es invalido.']"  />
+
+         <q-input rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="phone" label="Telefono*" lazy-rules
+                   type="number" :rules="[val => val && val.length > 6 || 'el campo es requerido']" />
 
          <div class="row">
 
-          <q-input class="col-6 " rounded outlined label-color="white"   color="blue"  v-model="coutry" label="Pais" />
-          <q-input class="col-6 " rounded outlined label-color="white"   color="blue"  v-model="city" label="Ciudad" />
+          <q-input class="col-6 " rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="coutry" label="Pais" />
+          <q-input class="col-6 " rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="city" label="Ciudad" />
 
          </div>
 
-          <q-input class="col-6 " rounded outlined label-color="white" color="blue"  v-model="rol" label="Rol" />
-          <q-input class="col-6 " rounded outlined label-color="white" color="blue"  v-model="company" label="Company" /> -->
+          <q-input class="col-6 " rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="rol" label="Rol" />
+          <q-input class="col-6 " rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="company" label="Company" /> 
       
     </div>
 
 
-            <q-btn class="relative my-3 justify-items-center items-end" type="submit" unelevated rounded color="primary" label="INSCRIBIRME" />
+            <q-btn class="relative my-2 top-4 left-43  "  type="submit" unelevated rounded color="primary" label="INSCRIBIRME" />
 
   </div>
 
@@ -110,7 +116,7 @@
   </div>
 
 
-  <q-btn-group rounded class="q-pa-md relative   xs:left-[2rem] md:left-[42rem] 2xl:left-[64rem]   "  >
+  <q-btn-group bg-color="white" rounded class="q-pa-md relative   xs:left-[2rem] md:left-[42rem] 2xl:left-[64rem]   "  >
     <q-avatar><img src="../../public/img/tiktok.png"></q-avatar>
     <q-avatar><img src="../../public/img/youtube.png"></q-avatar>
       <q-avatar><img src="../../public/img/facebook.png"></q-avatar>
@@ -125,26 +131,36 @@
 <style scoped>
  
 </style>
+ 
 
-<script>
+
+<script setup >
 import { defineComponent } from 'vue'
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
 
- 
 
- function setup(){
-   
-   const $q = useQuasar()
-   const name = ref('')
 
-  
+  const $q = useQuasar()
+  let name = ref('')
+  let last_name = ref('')
+  let email = ref('')
+  let phone = ref('')
+  let coutry = ref('')
+  let city = ref('')
+  let rol = ref('')
+  let company = ref('')
 
-    return {
-      name,
 
-      onSubmit () {
-        if (name.value == null) {
+
+const isEmailValid = (email) => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
+};
+
+
+const envio = () => {
+    if (name.value !== null) {
           $q.notify({
             color: 'red-5',
             textColor: 'white',
@@ -162,20 +178,11 @@ import { ref } from 'vue'
             message: 'Submitted'
           })
         }
-      },
-
-      onReset () {
-        name.value = null
-        
-      }
-    }
-  }
 
 
 
+}
+ 
 
-export default defineComponent({
-  name: 'IndexPage'  
-  
-})
+
 </script>
