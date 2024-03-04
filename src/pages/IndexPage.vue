@@ -5,7 +5,7 @@
 <div style="color:white">
   <br><br>
 
-{{$q.screen}}
+<!-- {{$q.screen}} -->
 
 </div>
 
@@ -67,7 +67,7 @@
         <div class="q-gutter-md" >
 
          <q-input rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="name" label="Nombre*" lazy-rules
-                        :rules="[val => val && val.length > 4 || 'Tu Nombre es requerido']" /> 
+                        :rules="[val => val && val.length > 3 || 'Tu Nombre es requerido']" /> 
 
          <q-input rounded outlined label-color="blue"  color="blue"  bg-color="white"  v-model="last_name" label="Apellido*" lazy-rules
                         :rules="[val => val && val.length > 4 || 'Tu Apellido es requerido']" /> 
@@ -159,20 +159,38 @@ const isEmailValid = (email) => {
 };
 
 
+    var data = new FormData();
+
+    data.append("name", name.value);
+    data.append("last_name", last_name.value);
+  
+    data.append("email", email.value);
+    data.append("phone", phone.value);
+   
+
+    data.append("coutry", coutry.value);
+    data.append("city", city.value.name);
+    data.append("rol", rol.value);
+
+    data.append("company", company.value);
+
+
+
 const envio = () => {
     if (name.value !== null) {
           $q.notify({
-            color: 'red-5',
+            color: 'green-4',
             textColor: 'white',
             icon: 'warning',
             message: 'You need to accept the license and terms first'
           })
 
-          console.log(name)
+          console.log(data)
+          
         }
         else {
           $q.notify({
-            color: 'green-4',
+            color: 'red-5',
             textColor: 'white',
             icon: 'cloud_done',
             message: 'Submitted'
